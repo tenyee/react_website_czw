@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script>
+        urlList = [{
+            name: '列表一',
+            type: 'table',
+            url: 'data/data.json'
+        }, {
+            name: '列表二',
+            type: 'table',
+            url: 'data/data.1.json'
+        }, {
+            name: '列表三',
+            type: 'table',
+            url: 'data/data.2.json'
+        }, {
+            name: '图片',
+            type: 'image',
+            list: [{
+                name: 'i1',
+                url: 'data/sql3.png'
+            },{
+                name: 'i2',
+                url: 'data/sql3.png'
+            },{
+                name: 'i2',
+                url: 'data/sql3.png'
+            }]
+        }];
+    </script>
+    <script src="common.js"></script>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
