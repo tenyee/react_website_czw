@@ -72,12 +72,21 @@ class ModalDemo extends React.Component {
         });
     }
 
-    handleOk = (e) => {
+    handleOk = (e, b, c) => {
+        console.log(this.refs.button_test);
+        console.log('e');
         console.log(e);
         this.setState({
             visible: false,
         });
         console.log(this.url)
+        let btn = this.refs.button_test.buttonNode
+        btn.disabled = true
+
+        console.log('button:')
+        console.log(btn)
+        console.log(btn.disabled)
+        debugger
         let demo = this.refs.getFormVlaue;//通过refs属性可以获得对话框内form对象
         demo.validateFields((err, values) => {
             if (!err) {
@@ -90,12 +99,12 @@ class ModalDemo extends React.Component {
 
                 sysname.sysname = values.sysname;
                 desc.desc = values.desc;
-                ip.dev_ip = this.record.name;
+                ip.dev_ip = this.record.dev_ip;
                 postData.push(sysname);
                 postData.push(desc);
                 postData.push(ip);
                 let a = JSON.stringify(postData);
-                console.log(a);
+               
                 //请求后台
                 fetch(this.url, {
                     method: 'POST',
@@ -124,7 +133,7 @@ class ModalDemo extends React.Component {
     render() {
         return (
             <div>
-                <Button type="primary" onClick={this.showModal}>
+                <Button ref='button_test' type="primary" onClick={this.showModal} >
                     {this.props.name}
                 </Button>
                 <Modal
@@ -134,7 +143,7 @@ class ModalDemo extends React.Component {
                     onCancel={this.handleCancel}
                 >
 
-                    <WrappedNormalLoginForm ref='getFormVlaue'> </WrappedNormalLoginForm>
+                    <WrappedNormalLoginForm ref='getFormVlaue' > </WrappedNormalLoginForm>
 
                 </Modal>
             </div>
