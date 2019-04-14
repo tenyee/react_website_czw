@@ -1,7 +1,7 @@
 import React from 'react';
-
+require('./mystyle.css')
 import {
-    Table, Input, Button, Icon, Form, Modal,
+    Table, Input, Button, Icon, Form, Modal,Tooltip,Popover,
     Checkbox
 } from 'antd';
 
@@ -263,6 +263,13 @@ class MyTable extends React.Component {
             });
         }
     }
+
+    getContent(record) {
+        return <p className="mydiv">
+                  {record.address}
+               </p>
+    }
+
     render() {
         var self = this;
         var dataSource = this.state.dataSource;
@@ -271,16 +278,49 @@ class MyTable extends React.Component {
         if (columns && columns[0].key != 'xuhao' && self.url) {
             columns.unshift(
                 {
-                    title: '序号',
-                    width: 100,
-                    key: 'xuhao',
-                    render: (text, record, index) => `${index + 1}`
+                    title: "住址",
+                    width:200,
+                    dataIndex: "address",
+                    className:"resultColumnsDiv", 
+                    key: "address",
+                    render: (text, record, index) => ( 
+                        <Popover placement="topLeft" content = {this.getContent(record)} trigger = "hover">
+                            {record.address}
+                        </Popover>
+                        )
                 }
             );
+            
+            columns.unshift(
+                {
+                    title: "姓名",
+                    width:'50px',
+                    dataIndex: "name",
+                    key: "name",
+                    render: (text, record, index) => ( 
+                        <Popover placement="top" content = {record.name}
+                                 trigger = "hover">
+                                 {record.name}
+                        </Popover>
+                        )
+                },
+            );
+
+            columns.unshift(
+                {
+                    title: '序号',
+                    width: '30px',
+                    key: 'xuhao',
+                    render: (text, record, index) => `${index + 1}`,
+                    
+                }
+            );
+
             columns.push(
                 {
                     title: '操作',
                     key: 'operation',
+                    width:200,
                     render: (text, record) => (  //塞入内容
                         <div>
                             <span id='take' style={{float:'left', width:70, height:30}}>
@@ -300,7 +340,8 @@ class MyTable extends React.Component {
         self.setSorter(columns);
         self.setSearch(columns);
 
-        return <Table dataSource={dataSource} columns={columns}/>;
+        return <Table dataSource={dataSource} columns={columns} />;
+        
     }
 }
 

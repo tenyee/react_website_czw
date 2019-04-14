@@ -1,0 +1,16 @@
+.resultColumnsDiv{
+	width:92%;
+	word-break: keep-all;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	ackground-color:yellow;
+  }
+
+.mydiv{
+	width: 300px;
+	height: auto;
+	word-wrap:break-word;
+	word-break:break-all;
+	overflow: hidden;
+}
